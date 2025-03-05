@@ -76,13 +76,16 @@ void NgapTask::handleInitialNasTransport(int ueId, OctetString &nasPdu, int64_t 
     }
 
     createUeContext(ueId, requestedSliceType);
+    m_logger->debug("------- Created");
 
     auto *ueCtx = findUeContext(ueId);
-    if (ueCtx == nullptr)
-        return;
+    if (ueCtx == nullptr){
+        m_logger->debug("------- UE context Null");
+        return;}
     auto *amfCtx = findAmfContext(ueCtx->associatedAmfId);
-    if (amfCtx == nullptr)
-        return;
+    if (amfCtx == nullptr){
+        m_logger->debug("------- AMF context not found");
+        return;}
 
     if (amfCtx->state != EAmfState::CONNECTED)
     {
@@ -132,6 +135,7 @@ void NgapTask::handleInitialNasTransport(int ueId, OctetString &nasPdu, int64_t 
     }
 
     auto *pdu = asn::ngap::NewMessagePdu<ASN_NGAP_InitialUEMessage>(ies);
+    m_logger->debug("------- Sending NGAP UE ASSOCIATED");
     sendNgapUeAssociated(ueId, pdu);
 }
 

@@ -91,7 +91,7 @@ void GnbRrcTask::releaseConnection(int ueId)
     asn::Free(asn_DEF_ASN_RRC_DL_DCCH_Message, pdu);
 
     // Delete UE RRC context
-    m_ueCtx.erase(ueId);
+    // m_ueCtx.erase(ueId);
 }
 
 void GnbRrcTask::handleRadioLinkFailure(int ueId)
