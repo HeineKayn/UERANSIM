@@ -65,7 +65,8 @@ int32_t extractSliceInfoAndModifyPdu(OctetString &nasPdu) {
 void NgapTask::handleInitialNasTransport(int ueId, OctetString &nasPdu, int64_t rrcEstablishmentCause,
                                             const std::optional<GutiMobileIdentity> &sTmsi)
 {
-    int32_t requestedSliceType = extractSliceInfoAndModifyPdu(nasPdu);
+    // int32_t requestedSliceType = extractSliceInfoAndModifyPdu(nasPdu);
+    int32_t requestedSliceType = 1;
 
     m_logger->debug("Initial NAS message received from UE[%d]", ueId);
 
