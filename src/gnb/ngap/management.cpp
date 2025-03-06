@@ -43,12 +43,9 @@ void NgapTask::createUeContext(int ueId, int32_t &requestedSliceType)
 
     // Perform AMF selection
     auto *amf = selectAmf(ueId, requestedSliceType);
-    if (amf == nullptr){
+    if (amf == nullptr)
         m_logger->err("AMF selection for UE[%d] failed. Could not find a suitable AMF.", ueId);
-        ctx->associatedAmfId = 2; // hardcoded for now
-    }
     else
-        m_logger->err("Amf ctxId [%d] found", amf->ctxId);
         ctx->associatedAmfId = amf->ctxId;
 }
 

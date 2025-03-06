@@ -42,12 +42,12 @@ namespace nr::gnb
 void GnbRrcTask::receiveRrcSetupRequest(int ueId, const ASN_RRC_RRCSetupRequest &msg)
 {
     auto *ue = tryFindUe(ueId);
-    // if (ue)
-    // {
-    //     // TODO: handle this more properly
-    //     m_logger->warn("Discarding RRC Setup Request, UE context already exists");
-    //     return;
-    // }
+    if (ue)
+    {
+        // TODO: handle this more properly
+        m_logger->warn("Discarding RRC Setup Request, UE context already exists");
+        return;
+    }
 
     if (msg.rrcSetupRequest.ue_Identity.present == ASN_RRC_InitialUE_Identity_PR_NOTHING)
     {
@@ -56,10 +56,6 @@ void GnbRrcTask::receiveRrcSetupRequest(int ueId, const ASN_RRC_RRCSetupRequest 
     }
 
     ue = createUe(ueId);
-    // if(!ue)
-    // {
-        
-    // }
 
     if (msg.rrcSetupRequest.ue_Identity.present == ASN_RRC_InitialUE_Identity_PR_ng_5G_S_TMSI_Part1)
     {
